@@ -4,12 +4,12 @@ const mqtt = require('mqtt');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// === ДАННЫЕ ИЗ DASH.WQTT.RU ===
+// === Данные из dash.wqtt.ru (обязательно замени, если изменились) ===
 const mqttOptions = {
   host: 'm1.wqtt.ru',
-  port: 1883,
-  username: 'u_FQJOCY',    // ← ЗАМЕНИ НА СВОЙ!
-  password: 'nq4MyE9O',     // ← ЗАМЕНИ НА СВОЙ!
+  port: 17126,
+  username: 'u_FJOCY',
+  password: 'nq4MyE96O',
 };
 
 const client = mqtt.connect(mqttOptions);
@@ -31,7 +31,7 @@ client.on('message', (topic, message) => {
   }
 });
 
-// Веб-интерфейс (как в лаб. №4, но с обновлением из облака)
+// Главная страница — интерфейс без авторизации
 app.get('/', (req, res) => {
   res.send(`
 <!DOCTYPE html>
@@ -79,7 +79,7 @@ app.get('/', (req, res) => {
   <div class="footer">Данные из облака MQTT • Обновление каждые 5 сек</div>
 
   <script>
-    async function updateData() {
+    async function fetchData() {
       try {
         const res = await fetch('/api/data');
         const data = await res.json();
@@ -96,14 +96,15 @@ app.get('/', (req, res) => {
         console.error('Ошибка:', e);
       }
     }
-    updateData();
-    setInterval(updateData, 5000);
+    fetchData();
+    setInterval(fetchData, 5000);
   </script>
 </body>
 </html>
   `);
 });
 
+// API-точка для получения данных — без авторизации
 app.get('/api/data', (req, res) => {
   res.json(latestData);
 });
