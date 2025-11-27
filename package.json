@@ -1,0 +1,13 @@
+{
+  "name": "greenhouse-monitor",
+  "version": "1.0.0",
+  "description": "Веб-интерфейс для мониторинга теплицы через MQTT (m1.wqtt.ru)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18",
+    "mqtt": "^5.0"
+  }
+}
