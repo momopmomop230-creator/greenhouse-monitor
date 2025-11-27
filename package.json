@@ -1,7 +1,7 @@
 {
   "name": "greenhouse-monitor",
   "version": "1.0.0",
-  "description": "Веб-интерфейс для мониторинга теплицы через MQTT (m1.wqtt.ru)",
+  "description": "Веб-интерфейс для мониторинга теплицы через MQTT",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
